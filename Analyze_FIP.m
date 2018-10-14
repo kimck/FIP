@@ -35,12 +35,12 @@ function [time,sig_norm,output_flag]=Analyze_FIP(filepath,filename,output_flag,b
 % This loads the reference and signal channel
 try
     currentfile=strcat(filepath,filename);
-    savefile=strrep(currentfile,'.mat','_processed.mat');
     load(currentfile)
 catch
     f = msgbox('Error: Data file cannot be found.');
     return
 end
+savefile=strrep(currentfile,'.mat','_processed.mat');
 
 % Determine number of fibers from data structure 
 numfibers=size(sig,2);

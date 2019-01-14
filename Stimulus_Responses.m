@@ -7,6 +7,27 @@
 % 
 % This script was written with MATLAB R2017a.
 %
+%
+% ------------------- Example -------------------
+% Example of how to run the function.
+% >> filepath = '/Users/Tina/Data/20190114/';
+% >> filename = 'mouse1.mat';
+% >> plot_pre = [2]; % plots 2s before each stimulus TTL.
+% >> plot_post = [10]; % plots 10s after each stimulus TTL.
+% >> ai_plotflag = [1 0 0 0 0 0 0]; % read stimulus TTL from AI1.
+% >> ai_labels = {'reward','','','','','',''};
+% >> [stim_trig_responses,time_trial,all_stimuli_fp]=Stimulus_Responses(filepath,filename,plot_pre,plot_post,ai_plotflag,ai_labels);
+%
+% ------------------- Inputs -------------------
+% >> filepath: pathname where data lies. 
+% >> filename: name of file to analyze.
+% >> plot_pre: number of seconds to plot prior to stimulus onset
+% >> plot_post: numer of seconds to plot after stimulus onset
+% >> ai_plotflag: array size [1 x 7] of 0's or 1's indicating which analog
+%       inputs to plot (note: Analog0 should record the camera frames.
+%       Analog1-7 record TLL inputs).
+% >> ai_labels: struct of size {1 x 7} with names of Analog inputs 1-7.
+%
 % ------------------- Outputs -------------------
 % >> stim_trig_responses
 %   type: struct
@@ -61,7 +82,7 @@ try
     data=load(strrep(currentfile,'.mat','_logAI.csv'));
     load(strrep(currentfile,'.mat','_processed.mat'));
     load(currentfile,'framerate','labels');
-    savefile=strrep(currentfile,'.mat','_aligned.mat');
+    savefile=strrep(currentfile,'.mat','_stimaligned.mat');
 catch
     f = msgbox('Error: Data file or log file cannot be found.');
     return
